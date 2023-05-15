@@ -1,0 +1,20 @@
+{
+  "name": "swagger-nusatala-openapi-3-0",
+  "version": "1.0.11",
+  "description": "This is a Nusatala API Documentation based on the OpenAPI 3.0 specification. You can find out more about Swagger at [https://swagger.io](https://swagger.io). In the third iteration of the nusatala, we've switched to the design first approach! You can now help us improve the API whether it's by making changes to the definition itself or to the code. That way, with time, we can improve the API in general, and expose some of the new features in OAS3.  _If you're looking for the Swagger 2.0/OAS 2.0 version of Nusatala, then click [here](https://editor.swagger.io/?url=https://nusatala.vercel.app/v2/swagger.yaml). Alternatively, you can load via the `Edit > Load Nusatala OAS 2.0` menu option!_  Some useful links: - [The Nusatala repository](https://github.com/oxychan/Team-Nusatala) - [The source API definition for the Nusatala](https://github.com/oxychan/Team-Nusatala/blob/master/src/main/resources/openapi.yaml)",
+  "main": "index.js",
+  "scripts": {
+	"prestart": "npm install",
+	"start": "node index.js"
+  },
+  "keywords": [
+    "swagger"
+  ],
+  "license": "Unlicense",
+  "private": true,
+  "dependencies": {
+    "connect": "^3.2.0",
+    "js-yaml": "^3.3.0",
+    "oas3-tools": "^2.2.3"
+  }
+}

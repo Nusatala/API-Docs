@@ -1,4 +1,12 @@
 FROM node
 
-RUN npm run prestart
-CMD ["npm", "run", "start"]
+WORKDIR /usr/src/app
+
+COPY package*.json ./
+
+RUN npm install
+
+COPY . .
+
+EXPOSE 8080
+CMD [ "node", "index.js" ]

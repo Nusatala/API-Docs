@@ -441,6 +441,10 @@ paths:
       responses:
         default:
           description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quiz_questions'
       x-swagger-router-controller: Question
   /quizzes/{level}/questions/{id}:
     get:
@@ -472,8 +476,7 @@ paths:
           content:
             application/json:
               schema:
-                type: string
-                x-content-type: application/json
+                $ref: '#/components/schemas/Quiz_questions'
         "400":
           description: Invalid question id supplied
       x-swagger-router-controller: Questions
@@ -512,6 +515,10 @@ paths:
       responses:
         default:
           description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Quiz_questions'
       x-swagger-router-controller: Question
     delete:
       tags:
@@ -539,6 +546,14 @@ paths:
       responses:
         "200":
           description: successful operation
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: question with id 2 has been deleted
         "400":
           description: Invalid id supplied
         "403":

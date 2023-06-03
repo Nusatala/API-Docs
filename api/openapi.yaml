@@ -1501,7 +1501,7 @@ components:
         label:
           type: string
           example: Angklung
-        title:
+        name:
           type: string
           example: Alat musik Angklung Jawa Barat
         thumbnail:
@@ -1511,10 +1511,13 @@ components:
           type: string
           example: "Dimainkan dengan cara digoyangkan, menghasilkan suara indah yang\
             \ khas. Mudah dipelajari dan memberikan pengalaman musik yang menyenangkan."
-        cost:
+        price:
           type: integer
           format: int64
           example: 300000
+        stock:
+          type: integer
+          example: 12
         link:
           type: string
           format: url

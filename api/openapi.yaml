@@ -28,29 +28,29 @@ tags:
 - name: user
   description: Operations about user
 paths:
-  /users:
+  /users/register:
     post:
       tags:
       - user
-      summary: Create user
-      description: This can only be done by the logged in user.
-      operationId: createUser
+      summary: Register user into system/database
+      description: ""
+      operationId: registerUser
       requestBody:
-        description: Created user object
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Users'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Users'
+              $ref: '#/components/schemas/users_register_body'
       responses:
-        default:
-          description: successful operation
+        "200":
+          description: OK
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Users'
+        "400":
+          description: Invalid username/password supplied
+        "422":
+          description: Username or email was taken
       x-swagger-router-controller: User
   /users/login:
     get:
@@ -192,30 +192,6 @@ paths:
           description: Invalid id supplied
         "403":
           description: You dont have permission to delete that id
-      x-swagger-router-controller: User
-  /users/register:
-    post:
-      tags:
-      - user
-      summary: Regist user into system/database
-      description: ""
-      operationId: registerUser
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/users_register_body'
-      responses:
-        "200":
-          description: OK
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Users'
-        "400":
-          description: Invalid username/password supplied
-        "422":
-          description: Username or email was taken
       x-swagger-router-controller: User
   /users/change-password:
     post:
@@ -1194,18 +1170,6 @@ components:
           type: string
           format: date
           example: 0014-11-13
-      example:
-        google_id: google_id
-        password: "12345"
-        google_secret: google_secret
-        role: false
-        updated_at: 0014-11-13T00:00:00.000+00:00
-        name: John
-        photo: gamelan.png
-        created_at: 0014-11-13T00:00:00.000+00:00
-        id: 10
-        email: john@email.com
-        username: theUser
     Articles:
       type: object
       properties:
@@ -1251,20 +1215,6 @@ components:
           type: string
           format: date
           example: 0014-12-14
-      example:
-        thumbnail: sanggar-seni-gamelan.png
-        bahan_pembuatan: logam perunggu
-        sources: logam perunggu
-        created_at: 0014-11-13T00:00:00.000+00:00
-        history: lorem ipsum dolor...
-        title: Jenis Jenis Gamelan
-        tutorial_id: 1
-        updated_at: 0014-12-14T00:00:00.000+00:00
-        user_id: 1
-        id: 2
-        image_id: 1
-        asal_daerah: sanggar-seni-gamelan.png
-        views: 123
     RequestArticles:
       type: object
       properties:
@@ -1395,13 +1345,6 @@ components:
           type: string
           format: date-time
           example: 2023-05-31 03:00:15
-      example:
-        question: Gamelan apa yang berasal dari Jawa Timur?
-        answer: Gamelan Reog Ponorogo
-        updated_at: 2023-05-13T16:30:00Z
-        user_id: 2
-        created_at: 2023-05-13T15:30:00Z
-        id: 1
     RequestFAQ:
       type: object
       properties:
@@ -1446,15 +1389,6 @@ components:
           type: string
           format: date-time
           example: 2023-05-13T16:30:00Z
-      example:
-        updated_at: 2023-05-13T16:30:00Z
-        user_id: 2
-        testimony: Aplikasi ini sangat membantu saya mempelajari alat musik indonesia
-        name: Iqbal Alfarizi
-        rating: 5
-        photo: pp.png
-        created_at: 2023-05-13T15:30:00Z
-        id: 1
     RequestTestimonials:
       type: object
       properties:
@@ -1499,13 +1433,6 @@ components:
           type: string
           format: date-time
           example: 2023-05-13T16:30:00Z
-      example:
-        image: angklung.png
-        updated_at: 2023-05-13T16:30:00Z
-        user_id: 2
-        created_at: 2023-05-13T15:30:00Z
-        id: 1
-        label: Angklung
     ImagesArray:
       type: array
       items:
@@ -1567,19 +1494,6 @@ components:
           type: string
           format: date-time
           example: 2023-05-13T15:30:00Z
-      example:
-        thumbnail: angklung.png
-        cost: 300000
-        updated_at: 2023-05-13T15:30:00Z
-        user_id: 2
-        link: https://example.com
-        rating: 4.7
-        description: "Dimainkan dengan cara digoyangkan, menghasilkan suara indah\
-          \ yang khas. Mudah dipelajari dan memberikan pengalaman musik yang menyenangkan."
-        created_at: 2023-05-13T15:30:00Z
-        id: 1
-        label: Angklung
-        title: Alat musik Angklung Jawa Barat
     RequestProducts:
       type: object
       properties:
@@ -1635,12 +1549,6 @@ components:
           type: string
           format: date-time
           example: 2023-05-13T17:30:00Z
-      example:
-        updated_at: 2023-05-13T17:30:00Z
-        link: https://youtu.be/eil9v7bno7g
-        created_at: 2023-05-13T15:30:00Z
-        id: 1
-        image_id: 12
     RequestTutorials:
       type: object
       properties:

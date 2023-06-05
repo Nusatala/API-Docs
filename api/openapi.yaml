@@ -23,15 +23,15 @@ externalDocs:
   description: Find out more about Swagger
   url: http://swagger.io
 servers:
-- url: https://nusatala.vercel.app/docs
+  - url: https://nusatala.vercel.app/docs
 tags:
-- name: user
-  description: Operations about user
+  - name: user
+    description: Operations about user
 paths:
   /users/register:
     post:
       tags:
-      - user
+        - user
       summary: Register user into system/database
       description: ""
       operationId: registerUser
@@ -39,14 +39,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/users_register_body'
+              $ref: "#/components/schemas/users_register_body"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: "#/components/schemas/Users"
         "400":
           description: Invalid username/password supplied
         "422":
@@ -55,27 +55,27 @@ paths:
   /users/login:
     get:
       tags:
-      - user
+        - user
       summary: Logs user into the system
       description: ""
       operationId: loginUser
       parameters:
-      - name: username
-        in: query
-        description: The user name for login
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
-      - name: password
-        in: query
-        description: The password for login in clear text
-        required: false
-        style: form
-        explode: true
-        schema:
-          type: string
+        - name: username
+          in: query
+          description: The user name for login
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
+        - name: password
+          in: query
+          description: The password for login in clear text
+          required: false
+          style: form
+          explode: true
+          schema:
+            type: string
       responses:
         "200":
           description: successful operation
@@ -105,7 +105,7 @@ paths:
   /users/logout:
     get:
       tags:
-      - user
+        - user
       summary: Logs out current logged in user session
       description: ""
       operationId: logoutUser
@@ -117,26 +117,26 @@ paths:
   /users/{id}:
     get:
       tags:
-      - user
+        - user
       summary: Get user by id
       description: ""
       operationId: getUserById
       parameters:
-      - name: id
-        in: path
-        description: 'The name that needs to be fetched. Use user1 for testing. '
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: "The name that needs to be fetched. Use user1 for testing. "
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Users'
+                $ref: "#/components/schemas/Users"
         "400":
           description: Invalid id supplied
         "403":
@@ -144,47 +144,47 @@ paths:
       x-swagger-router-controller: User
     put:
       tags:
-      - user
+        - user
       summary: Update user
       description: This can only be done by the logged in user.
       operationId: updateUser
       parameters:
-      - name: id
-        in: path
-        description: id that need to be deleted
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: id
+          in: path
+          description: id that need to be deleted
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         description: Update an existent user in the Nusatala App
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Users'
+              $ref: "#/components/schemas/Users"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Users'
+              $ref: "#/components/schemas/Users"
       responses:
         default:
           description: successful operation
       x-swagger-router-controller: User
     delete:
       tags:
-      - user
+        - user
       summary: Delete user
       description: This can only be done by the logged in user.
       operationId: deleteUser
       parameters:
-      - name: id
-        in: path
-        description: The id that needs to be deleted
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: id
+          in: path
+          description: The id that needs to be deleted
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         "200":
           description: successful operation
@@ -196,7 +196,7 @@ paths:
   /users/change-password:
     post:
       tags:
-      - user
+        - user
       summary: Change user's password on the system/database
       description: Change user's password on the system/database
       operationId: changeUserPassword
@@ -205,10 +205,10 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/users_changepassword_body'
+              $ref: "#/components/schemas/users_changepassword_body"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Users'
+              $ref: "#/components/schemas/Users"
       responses:
         "200":
           description: Your password successfuly changed
@@ -220,7 +220,7 @@ paths:
   /articles:
     get:
       tags:
-      - articles
+        - articles
       summary: Get all articles
       description: This can only be done by the logged in user.
       operationId: getAllArticles
@@ -230,98 +230,98 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Articles'
+                $ref: "#/components/schemas/Articles"
       x-swagger-router-controller: Articles
     post:
       tags:
-      - articles
+        - articles
       summary: Create article
       description: create new article
       operationId: postArticles
       requestBody:
-        $ref: '#/components/requestBodies/Articles'
+        $ref: "#/components/requestBodies/Articles"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Articles'
+                $ref: "#/components/schemas/Articles"
         "400":
           description: Invalid username/password supplied
       x-swagger-router-controller: Articles
   /articles/{id}:
     get:
       tags:
-      - articles
+        - articles
       summary: get article data using id
       description: get specific article data using id
       operationId: getArticle
       parameters:
-      - name: id
-        in: path
-        description: article id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: article id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Articles'
+                $ref: "#/components/schemas/Articles"
             application/x-www-form-urlencoded:
               schema:
-                $ref: '#/components/schemas/Articles'
+                $ref: "#/components/schemas/Articles"
         "400":
           description: Invalid id supplied
       x-swagger-router-controller: Articles
     put:
       tags:
-      - articles
+        - articles
       summary: update the article data
       description: update the specific article data using id
       operationId: putArticle
       parameters:
-      - name: id
-        in: path
-        description: id of the article to be updated
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id of the article to be updated
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Articles'
+        $ref: "#/components/requestBodies/Articles"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Articles'
+                $ref: "#/components/schemas/Articles"
             application/x-www-form-urlencoded:
               schema:
-                $ref: '#/components/schemas/Articles'
+                $ref: "#/components/schemas/Articles"
       x-swagger-router-controller: Articles
     delete:
       tags:
-      - articles
+        - articles
       summary: delete the article data
       description: delete specific article data using id
       operationId: deleteArticle
       parameters:
-      - name: id
-        in: path
-        description: id of the article to be deleted
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id of the article to be deleted
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
@@ -329,188 +329,188 @@ paths:
   /quizzes/{level}:
     get:
       tags:
-      - quizzes
+        - quizzes
       summary: Get all quizzes
       description: ""
       operationId: getQuizzes
       parameters:
-      - name: level
-        in: path
-        description: Quiz level for filltering the level of quizzes
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: level
+          in: path
+          description: Quiz level for filltering the level of quizzes
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Quizzes'
+                $ref: "#/components/schemas/Quizzes"
         "403":
           description: You cant access all the quizzes without login
       x-swagger-router-controller: Quizzes
     post:
       tags:
-      - quizzes
+        - quizzes
       summary: Create quiz
       description: This can only be done by the logged in admin.
       operationId: createQuiz
       parameters:
-      - name: level
-        in: path
-        description: Quiz level for filltering the level of quizzes
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: level
+          in: path
+          description: Quiz level for filltering the level of quizzes
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         description: Created quizzes object
         content:
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/quizzes_level_body'
+              $ref: "#/components/schemas/quizzes_level_body"
       responses:
         default:
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Quizzes'
+                $ref: "#/components/schemas/Quizzes"
       x-swagger-router-controller: Quizzes
   /quizzes/{level}/questions:
     post:
       tags:
-      - question
+        - question
       summary: Create new question
       description: This can only be done by the logged in admin.
       operationId: createQuestion
       parameters:
-      - name: level
-        in: path
-        description: Quiz level for filltering the level of quizzes
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: level
+          in: path
+          description: Quiz level for filltering the level of quizzes
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       requestBody:
         description: Update an existent user in the Nusatala App
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Quiz_questions'
+              $ref: "#/components/schemas/Quiz_questions"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Quiz_questions'
+              $ref: "#/components/schemas/Quiz_questions"
       responses:
         default:
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Quiz_questions'
+                $ref: "#/components/schemas/Quiz_questions"
       x-swagger-router-controller: Question
   /quizzes/{level}/questions/{id}:
     get:
       tags:
-      - questions
+        - questions
       summary: Get question by id
       description: ""
       operationId: getQuestion
       parameters:
-      - name: level
-        in: path
-        description: Quiz level for filltering the level of quizzes
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: id
-        in: path
-        description: id of the question
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: level
+          in: path
+          description: Quiz level for filltering the level of quizzes
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: id of the question
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Quiz_questions'
+                $ref: "#/components/schemas/Quiz_questions"
         "400":
           description: Invalid question id supplied
       x-swagger-router-controller: Questions
     put:
       tags:
-      - question
+        - question
       summary: Update question
       description: This can only be done by the logged in admin.
       operationId: updateQuestion
       parameters:
-      - name: level
-        in: path
-        description: Quiz level for filltering the level of quizzes
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: id
-        in: path
-        description: id of the question
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: level
+          in: path
+          description: Quiz level for filltering the level of quizzes
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: id of the question
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
         description: Update an existent user in the Nusatala App
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Quiz_questions'
+              $ref: "#/components/schemas/Quiz_questions"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/Quiz_questions'
+              $ref: "#/components/schemas/Quiz_questions"
       responses:
         default:
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Quiz_questions'
+                $ref: "#/components/schemas/Quiz_questions"
       x-swagger-router-controller: Question
     delete:
       tags:
-      - questions
+        - questions
       summary: Delete questions
       description: This can only be done by the logged in admin.
       operationId: deleteQuestions
       parameters:
-      - name: level
-        in: path
-        description: Quiz level for filltering the level of quizzes
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
-      - name: id
-        in: path
-        description: id of the question
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: level
+          in: path
+          description: Quiz level for filltering the level of quizzes
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
+        - name: id
+          in: path
+          description: id of the question
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
@@ -530,7 +530,7 @@ paths:
   /faq:
     get:
       tags:
-      - faq
+        - faq
       summary: Get faq
       description: Get all frequently asked question
       operationId: getAllFaq
@@ -540,10 +540,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FAQ'
+                $ref: "#/components/schemas/FAQ"
             application/x-www-form-urlencoded:
               schema:
-                $ref: '#/components/schemas/FAQ'
+                $ref: "#/components/schemas/FAQ"
         "400":
           description: Invalid id supplied
         "403":
@@ -551,97 +551,97 @@ paths:
       x-swagger-router-controller: Faq
     post:
       tags:
-      - faq
+        - faq
       summary: Create FAQ
       description: Create frequently asked question
       operationId: createFAQ
       requestBody:
-        $ref: '#/components/requestBodies/FAQ'
+        $ref: "#/components/requestBodies/FAQ"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FAQ'
+                $ref: "#/components/schemas/FAQ"
             application/x-www-form-urlencoded:
               schema:
-                $ref: '#/components/schemas/FAQ'
+                $ref: "#/components/schemas/FAQ"
         "400":
           description: there is invalid value supplied
       x-swagger-router-controller: Faq
   /faq/{id}:
     get:
       tags:
-      - faq
+        - faq
       summary: Get faq by id
       description: Get specific frequently asked question by id
       operationId: faqIdGET
       parameters:
-      - name: id
-        in: path
-        description: The faq's id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: The faq's id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FAQ'
+                $ref: "#/components/schemas/FAQ"
             application/x-www-form-urlencoded:
               schema:
-                $ref: '#/components/schemas/FAQ'
+                $ref: "#/components/schemas/FAQ"
         "400":
           description: Invalid id supplied
       x-swagger-router-controller: Faq
     put:
       tags:
-      - faq
+        - faq
       summary: Update faq
       description: Update frequently asked question by id
       operationId: updateFaq
       parameters:
-      - name: id
-        in: path
-        description: The faq's id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: The faq's id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/FAQ'
+        $ref: "#/components/requestBodies/FAQ"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/FAQ'
+                $ref: "#/components/schemas/FAQ"
             application/x-www-form-urlencoded:
               schema:
-                $ref: '#/components/schemas/FAQ'
+                $ref: "#/components/schemas/FAQ"
       x-swagger-router-controller: Faq
     delete:
       tags:
-      - faq
+        - faq
       summary: Delete faq
       description: Delete spesific frequently asked question by id
       operationId: deleteFaq
       parameters:
-      - name: id
-        in: path
-        description: The faq's id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: The faq's id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
@@ -653,7 +653,7 @@ paths:
   /testimonials:
     get:
       tags:
-      - testimonials
+        - testimonials
       summary: Get testimonials
       description: Get all testimonials
       operationId: getAllTestimonials
@@ -663,10 +663,10 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Testimonials'
+                $ref: "#/components/schemas/Testimonials"
             application/x-www-form-urlencoded:
               schema:
-                $ref: '#/components/schemas/Testimonials'
+                $ref: "#/components/schemas/Testimonials"
         "400":
           description: Invalid id supplied
         "403":
@@ -674,88 +674,88 @@ paths:
       x-swagger-router-controller: Testimonials
     post:
       tags:
-      - testimonials
+        - testimonials
       summary: Create testimonials
       description: Create testimonials
       operationId: createTestimonials
       requestBody:
-        $ref: '#/components/requestBodies/Testimonials'
+        $ref: "#/components/requestBodies/Testimonials"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Testimonials'
+                $ref: "#/components/schemas/Testimonials"
         "400":
           description: there is invalid value supplied
       x-swagger-router-controller: Testimonials
   /testimonials/{id}:
     get:
       tags:
-      - testimonials
+        - testimonials
       summary: Get testimonial's by id
       description: Get specific testimonial by id
       operationId: testimonialsIdGET
       parameters:
-      - name: id
-        in: path
-        description: The testimonial's id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: The testimonial's id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Testimonials'
+                $ref: "#/components/schemas/Testimonials"
         "400":
           description: Invalid id supplied
       x-swagger-router-controller: Testimonials
     put:
       tags:
-      - testimonials
+        - testimonials
       summary: Update testimonial
       description: Update specific testimonial by id
       operationId: updateTestimonial
       parameters:
-      - name: id
-        in: path
-        description: The testimonial's id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: The testimonial's id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Testimonials'
+        $ref: "#/components/requestBodies/Testimonials"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Testimonials'
+                $ref: "#/components/schemas/Testimonials"
       x-swagger-router-controller: Testimonials
     delete:
       tags:
-      - testimonials
+        - testimonials
       summary: Delete testimonial
       description: Delete spesific testimonial by id
       operationId: deleteTestimonial
       parameters:
-      - name: id
-        in: path
-        description: The testimonial's id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: The testimonial's id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
@@ -767,7 +767,7 @@ paths:
   /tutorials:
     get:
       tags:
-      - tutorials
+        - tutorials
       summary: Get all tutorials
       description: Get all tutorials
       operationId: tutorialsGET
@@ -777,96 +777,96 @@ paths:
       x-swagger-router-controller: Tutorials
     post:
       tags:
-      - tutorials
+        - tutorials
       summary: Create a tutorial
       description: Create a tutorial
       operationId: tutorialsPOST
       requestBody:
-        $ref: '#/components/requestBodies/Tutorials'
+        $ref: "#/components/requestBodies/Tutorials"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tutorials'
+                $ref: "#/components/schemas/Tutorials"
       x-swagger-router-controller: Tutorials
   /tutorials/{id}:
     get:
       tags:
-      - tutorials
+        - tutorials
       summary: Get a tutorial
       description: Get specific tutorial using id
       operationId: getTutorial
       parameters:
-      - name: id
-        in: path
-        description: id for get specific tutorial
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id for get specific tutorial
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tutorials'
+                $ref: "#/components/schemas/Tutorials"
             application/x-www-form-urlencoded:
               schema:
-                $ref: '#/components/schemas/Tutorials'
+                $ref: "#/components/schemas/Tutorials"
         "400":
           description: Invalid id supplied
       x-swagger-router-controller: Tutorials
     put:
       tags:
-      - tutorials
+        - tutorials
       summary: Update tutorial
       description: Update spesific tutorial using id
       operationId: updateTutorial
       parameters:
-      - name: id
-        in: path
-        description: id for tutorial that need to be updated
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id for tutorial that need to be updated
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
         description: Update an existent tutorial data in the Nusatala App
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestTutorials'
+              $ref: "#/components/schemas/RequestTutorials"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/RequestTutorials'
+              $ref: "#/components/schemas/RequestTutorials"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Tutorials'
+                $ref: "#/components/schemas/Tutorials"
       x-swagger-router-controller: Tutorials
     delete:
       tags:
-      - tutorials
+        - tutorials
       summary: Delete the tutorial data
       description: Delete specific tutorial data using id
       operationId: deleteTutorial
       parameters:
-      - name: id
-        in: path
-        description: id of the tutorial to be deleted
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id of the tutorial to be deleted
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
@@ -874,7 +874,7 @@ paths:
   /images:
     get:
       tags:
-      - images
+        - images
       summary: Get images
       description: Get all images
       operationId: getAllImages
@@ -884,138 +884,138 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Images'
+                $ref: "#/components/schemas/Images"
       x-swagger-router-controller: Images
     post:
       tags:
-      - images
+        - images
       summary: Create images
       description: Create images
       operationId: createImage
       requestBody:
-        $ref: '#/components/requestBodies/Images'
+        $ref: "#/components/requestBodies/Images"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Images'
+                $ref: "#/components/schemas/Images"
         "400":
           description: there is invalid value supplied
       x-swagger-router-controller: Images
   /images/{label}/2-images:
     get:
       tags:
-      - images
+        - images
       summary: Get images
       description: Get two images using label
       operationId: getImagesLimit
       parameters:
-      - name: label
-        in: path
-        description: Label untuk memfilter gambar
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: string
+        - name: label
+          in: path
+          description: Label untuk memfilter gambar
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: string
       responses:
         "200":
           description: Success
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ImagesArray'
+                $ref: "#/components/schemas/ImagesArray"
               example:
-              - id: 1
-                user_id: 2
-                label: Angklung
-                image: angklung.png
-                created_at: 2023-05-13T15:30:00Z
-                updated_at: 2023-05-13T16:30:00Z
-              - id: 2
-                user_id: 2
-                label: Angklung
-                image: angklung1.png
-                created_at: 2023-05-13T15:30:00Z
-                updated_at: 2023-05-13T16:30:00Z
+                - id: 1
+                  user_id: 2
+                  label: Angklung
+                  image: angklung.png
+                  created_at: 2023-05-13T15:30:00Z
+                  updated_at: 2023-05-13T16:30:00Z
+                - id: 2
+                  user_id: 2
+                  label: Angklung
+                  image: angklung1.png
+                  created_at: 2023-05-13T15:30:00Z
+                  updated_at: 2023-05-13T16:30:00Z
         "400":
           description: Invalid request
       x-swagger-router-controller: Images
   /images/{id}:
     get:
       tags:
-      - images
+        - images
       summary: Get image data using id
       description: Get specific image data using id
       operationId: getImage
       parameters:
-      - name: id
-        in: path
-        description: image id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: image id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Images'
+                $ref: "#/components/schemas/Images"
         "400":
           description: Invalid id supplied
       x-swagger-router-controller: Images
     put:
       tags:
-      - images
+        - images
       summary: Update the image data
       description: Update the specific image data using id
       operationId: putImage
       parameters:
-      - name: id
-        in: path
-        description: id of the image to be updated
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id of the image to be updated
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
         description: Update an existent image data in the Nusatala App
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/RequestImages'
+              $ref: "#/components/schemas/RequestImages"
           application/x-www-form-urlencoded:
             schema:
-              $ref: '#/components/schemas/RequestImages'
+              $ref: "#/components/schemas/RequestImages"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Images'
+                $ref: "#/components/schemas/Images"
       x-swagger-router-controller: Images
     delete:
       tags:
-      - images
+        - images
       summary: delete the image data
       description: Delete specific image data using id
       operationId: deleteImage
       parameters:
-      - name: id
-        in: path
-        description: id of the image to be deleted
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id of the image to be deleted
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
@@ -1023,7 +1023,7 @@ paths:
   /products:
     get:
       tags:
-      - products
+        - products
       summary: Get all products
       description: Get all product
       operationId: getAllProducts
@@ -1033,92 +1033,92 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products'
+                $ref: "#/components/schemas/Products"
       x-swagger-router-controller: Products
     post:
       tags:
-      - products
+        - products
       summary: Create products
       description: Create new a product
       operationId: postProduct
       requestBody:
-        $ref: '#/components/requestBodies/Products'
+        $ref: "#/components/requestBodies/Products"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products'
+                $ref: "#/components/schemas/Products"
         "400":
           description: Incorrect data entered
       x-swagger-router-controller: Products
   /products/{id}:
     get:
       tags:
-      - products
+        - products
       summary: Get product data using id
       description: Get specific product data using id
       operationId: getProduct
       parameters:
-      - name: id
-        in: path
-        description: product id
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: product id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products'
+                $ref: "#/components/schemas/Products"
         "400":
           description: Invalid id supplied
       x-swagger-router-controller: Products
     put:
       tags:
-      - products
+        - products
       summary: Update the product data
       description: Update the specific product data using id
       operationId: putProduct
       parameters:
-      - name: id
-        in: path
-        description: id of the product to be updated
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id of the product to be updated
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       requestBody:
-        $ref: '#/components/requestBodies/Products'
+        $ref: "#/components/requestBodies/Products"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Products'
+                $ref: "#/components/schemas/Products"
       x-swagger-router-controller: Products
     delete:
       tags:
-      - products
+        - products
       summary: Delete the product data
       description: Delete specific product data using id
       operationId: deleteProduct
       parameters:
-      - name: id
-        in: path
-        description: id of the product to be deleted
-        required: true
-        style: simple
-        explode: false
-        schema:
-          type: integer
+        - name: id
+          in: path
+          description: id of the product to be deleted
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
       responses:
         "200":
           description: successful operation
@@ -1181,9 +1181,6 @@ components:
         title:
           type: string
           example: Jenis Jenis Gamelan
-        thumbnail:
-          type: string
-          example: sanggar-seni-gamelan.png
         asal_daerah:
           type: string
           example: sanggar-seni-gamelan.png
@@ -1226,9 +1223,6 @@ components:
         title:
           type: string
           example: Jenis Jenis Gamelan
-        thumbnail:
-          type: string
-          example: sanggar-seni-gamelan.png
         asal_daerah:
           type: string
           example: sanggar-seni-gamelan.png
@@ -1428,7 +1422,7 @@ components:
     ImagesArray:
       type: array
       items:
-        $ref: '#/components/schemas/Images'
+        $ref: "#/components/schemas/Images"
     RequestImages:
       type: object
       properties:
@@ -1464,7 +1458,8 @@ components:
           example: angklung.png
         description:
           type: string
-          example: "Dimainkan dengan cara digoyangkan, menghasilkan suara indah yang\
+          example:
+            "Dimainkan dengan cara digoyangkan, menghasilkan suara indah yang\
             \ khas. Mudah dipelajari dan memberikan pengalaman musik yang menyenangkan."
         price:
           type: integer
@@ -1509,7 +1504,8 @@ components:
           example: angklung.png
         description:
           type: string
-          example: "Dimainkan dengan cara digoyangkan, menghasilkan suara indah yang\
+          example:
+            "Dimainkan dengan cara digoyangkan, menghasilkan suara indah yang\
             \ khas. Mudah dipelajari dan memberikan pengalaman musik yang menyenangkan."
         price:
           type: integer
@@ -1627,56 +1623,56 @@ components:
           schema:
             type: array
             items:
-              $ref: '#/components/schemas/Users'
+              $ref: "#/components/schemas/Users"
     Articles:
       content:
         application/x-www-form-urlencoded:
           schema:
-            $ref: '#/components/schemas/RequestArticles'
+            $ref: "#/components/schemas/RequestArticles"
         application/json:
           schema:
-            $ref: '#/components/schemas/RequestArticles'
+            $ref: "#/components/schemas/RequestArticles"
     Images:
       description: Create image
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RequestImages'
+            $ref: "#/components/schemas/RequestImages"
         application/x-www-form-urlencoded:
           schema:
-            $ref: '#/components/schemas/RequestImages'
+            $ref: "#/components/schemas/RequestImages"
     Products:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RequestProducts'
+            $ref: "#/components/schemas/RequestProducts"
         application/x-www-form-urlencoded:
           schema:
-            $ref: '#/components/schemas/RequestProducts'
+            $ref: "#/components/schemas/RequestProducts"
     Tutorials:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RequestTutorials'
+            $ref: "#/components/schemas/RequestTutorials"
         application/x-www-form-urlencoded:
           schema:
-            $ref: '#/components/schemas/RequestTutorials'
+            $ref: "#/components/schemas/RequestTutorials"
     Testimonials:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RequestTestimonials'
+            $ref: "#/components/schemas/RequestTestimonials"
         application/x-www-form-urlencoded:
           schema:
-            $ref: '#/components/schemas/RequestTestimonials'
+            $ref: "#/components/schemas/RequestTestimonials"
     FAQ:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/RequestFAQ'
+            $ref: "#/components/schemas/RequestFAQ"
         application/x-www-form-urlencoded:
           schema:
-            $ref: '#/components/schemas/RequestFAQ'
+            $ref: "#/components/schemas/RequestFAQ"
   securitySchemes:
     nusatala_auth:
       type: oauth2

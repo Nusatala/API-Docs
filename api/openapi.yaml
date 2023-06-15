@@ -1025,14 +1025,25 @@ paths:
       description: Scan image
       operationId: scanImage
       requestBody:
-        $ref: " "
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                image:
+                  type: string
+                  example: "D:/Data/bonang.png"
       responses:
         "200":
           description: successful operation
           content:
             application/json:
               schema:
-                $ref: " "
+                type: object
+                properties:
+                  label_id:
+                    type: integer
+                    example: 1
         "400":
           description: there is invalid value supplied
       x-swagger-router-controller: Images

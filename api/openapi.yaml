@@ -250,6 +250,51 @@ paths:
         "400":
           description: Invalid username/password supplied
       x-swagger-router-controller: Articles
+  /articles/new:
+    get:
+      tags:
+        - articles
+      summary: Get latest articles
+      description: get latest articles
+      operationId: getLatestArticles
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Articles"
+      x-swagger-router-controller: Articles
+  /articles/popularity:
+    get:
+      tags:
+        - articles
+      summary: Get popular articles
+      description: get popular articles
+      operationId: getPopularArticles
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Articles"
+      x-swagger-router-controller: Articles
+  /articles/label/{label_id}:
+    get:
+      tags:
+        - articles
+      summary: Get articles by label id
+      description: get latest articles
+      operationId: getLatestArticles
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Articles"
+      x-swagger-router-controller: Articles
   /articles/{id}:
     get:
       tags:
@@ -791,6 +836,35 @@ paths:
               schema:
                 $ref: "#/components/schemas/Tutorials"
       x-swagger-router-controller: Tutorials
+  /tutorials/label/{id}:
+    get:
+      tags:
+        - tutorials
+      summary: Get tutorial by label id
+      description: Get specific tutorial using label id
+      operationId: getTutorialByLael
+      parameters:
+        - name: id
+          in: path
+          description: id for get specific tutorial
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Tutorials"
+            application/x-www-form-urlencoded:
+              schema:
+                $ref: "#/components/schemas/Tutorials"
+        "400":
+          description: Invalid id supplied
+      x-swagger-router-controller: Tutorials
   /tutorials/{id}:
     get:
       tags:
@@ -943,6 +1017,25 @@ paths:
         "400":
           description: Invalid request
       x-swagger-router-controller: Images
+  /images/scan:
+    post:
+      tags:
+        - images
+      summary: Scan image
+      description: Scan image
+      operationId: scanImage
+      requestBody:
+        $ref: " "
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: " "
+        "400":
+          description: there is invalid value supplied
+      x-swagger-router-controller: Images
   /images/{id}:
     get:
       tags:
@@ -1053,6 +1146,32 @@ paths:
         "400":
           description: Incorrect data entered
       x-swagger-router-controller: Products
+  /products/label/{id}:
+    get:
+      tags:
+        - products
+      summary: Get product using label id
+      description: Get specific product using label id
+      operationId: getProductLabel
+      parameters:
+        - name: id
+          in: path
+          description: product id
+          required: true
+          style: simple
+          explode: false
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Products"
+        "400":
+          description: Invalid id supplied
+      x-swagger-router-controller: Products
   /products/{id}:
     get:
       tags:
@@ -1123,6 +1242,47 @@ paths:
         "200":
           description: successful operation
       x-swagger-router-controller: Products
+  /healthCheck:
+    get:
+      tags:
+        - healthCheck
+      summary: Get health status
+      description: Get health status
+      operationId: getHealthStatus
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/healthCheck"
+      x-swagger-router-controller: healthCheck
+  /nearby-search?latitude=-latitude&longitude=longtitude:
+    get:
+      tags:
+        - nearby-search
+      summary: Get nearby location of art community
+      description: Get nearby location of art community
+      operationId: getNearbySearch
+      parameters:
+        - in: query
+          name: latitude
+          schema:
+            type: string
+          description: latitude form user location
+        - in: query
+          name: longtitude
+          schema:
+            type: string
+          description: longtitude form user location
+      responses:
+        "200":
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/nearbySearch"
+      x-swagger-router-controller: nearbySearch
 components:
   schemas:
     Users:
@@ -1438,6 +1598,18 @@ components:
         image:
           type: string
           example: angklung.png
+    healthCheck:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "This Cloud Run is healthy"
+    nearbySearch:
+      type: object
+      properties:
+        business_status:
+          type: string
+          example: "OPERATIONAL"
     Products:
       type: object
       properties:
